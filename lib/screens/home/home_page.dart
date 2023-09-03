@@ -41,10 +41,17 @@ class _HomePageState extends State<HomePage> {
                   style: textTheme.headlineSmall!.copyWith(
                       fontWeight: FontWeight.bold, color: Colors.black87)),
               Spacer(),
-              _buildQuizView(),
+              _buildQuizView(
+                  'Question 1 of 1', 'What is the capital of France?'),
               Spacer(),
-              _buildButtonPanel(),
-              SizedBox(height: 16.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  _buildButtonPanel(Colors.deepOrangeAccent,'back'),
+                  _buildButtonPanel(Colors.greenAccent,'go'),
+                  SizedBox(height: 16.0),
+                ],
+              )
             ],
           ),
         ),
@@ -52,13 +59,126 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  _buildQuizView() {
+  _buildQuizView(String text1, String text2) {
     // TODO: build UI
-    return Center(child: Text('TODO: build UI'));
+    return Center(
+      child: Container(
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(50.0),
+            border: Border.all(width: 2, color: Colors.black)),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Text(
+                text1,
+                style: TextStyle(color: Colors.black, fontSize: 30.0),
+              ),
+            ),
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(15.0, 0, 15.0, 20.0),
+                child: Container(
+                  padding: EdgeInsets.all(16.0),
+                  margin: EdgeInsets.all(10.0),
+                  decoration: BoxDecoration(
+                      color: Colors.teal,
+                      borderRadius: BorderRadius.circular(50.0),
+                      border: Border.all(color: Colors.black, width: 2)),
+                  child: Column(
+                    children: [
+                      Text(
+                        text2,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: Colors.white, fontSize: 30.0),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                child: Column(
+                  children: [
+                    _choicebuild('A','Berlin'),
+                    _choicebuild('B','London'),
+                    _choicebuild('C','Madrid'),
+                    _choicebuild('D','Paris'),
+                    SizedBox(
+                      height: 20,
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
-  _buildButtonPanel() {
+  Container _choicebuild(
+    String choice,
+      String description,
+  ) {
+    return Container(
+      padding: EdgeInsets.all(5.0),
+      margin: EdgeInsets.all(10.0),
+      decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10.0),
+          border: Border.all(color: Colors.black, width: 2)),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Container(
+              width: 50,
+              height: 50,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius:  BorderRadius.circular(10.0),
+                border: Border.all(color: Colors.black,width: 2),
+              ),child: Center(
+              child: Text(choice,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold)),
+            ),
+            ),
+            Row(
+              children: [
+                SizedBox(
+                  width: 20,
+                ),
+                Text(description,style: TextStyle(fontSize: 30)),
+              ],
+            ),
+          ],
+
+        ),
+      ),
+    );
+  }
+
+  _buildButtonPanel(Color color,String skip) {
     // TODO: build UI
-    return Center(child: Text('TODO: build UI'));
+    return Expanded(
+      child: Center(
+        child: Container(
+          padding: EdgeInsets.all(16.0),
+          margin: EdgeInsets.all(10.0),
+          width: 130,
+          height: 40,
+          decoration: BoxDecoration(
+              color: color,
+              borderRadius: BorderRadius.circular(30.0),
+              border: Border.all(color: Colors.black, width: 2),
+          ),child: Center(child: Text(skip,style: TextStyle(fontSize: 20,color: Colors.black) )),
+        ),
+      ),
+    );
   }
 }
